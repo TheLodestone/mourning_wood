@@ -1,0 +1,100 @@
+"machine_sludge"
+{
+    // General
+    //-----------------------------------------------------------------------------------------------------------------
+    "BaseClass"             "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+    "AbilityTextureName"    "batrider_sticky_napalm"
+    "MaxLevel"              "1"
+    "AOERadius"             "%radius"
+
+    // Casting
+    //-----------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"      "0.2"
+    "AbilityCooldown"       "10.0"
+    "AbilityCastRange"      "500"
+
+    // Cost
+    //-----------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "5"
+    
+    // Special
+    //-----------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+        "01"
+        {
+            "var_type"      "FIELD_INTEGER"
+            "radius"        "200"
+        }
+        "02"
+        {
+            "var_type"      "FIELD_INTEGER"
+            "movespeed"     "100"
+        }
+        "03"
+        {
+            "var_Type"      "FIELD_INTEGER"
+            "duration"      "10"
+        }
+    }
+    
+    "precache"
+    {
+        soundfile           "soundevents/game_sounds_heroes/game_sounds_batrider.vsndevts"
+        "particle"          "particles/units/heroes/hero_alchemist/alchemist_acid_spray.vpcf"
+    }
+    
+    "OnSpellStart"
+    {
+        "FireSound"
+        {
+            "EffectName"    "Hero_Batrider.StickyNapalm.Impact"
+        }
+
+        "CreateThinker"
+        {
+            "ModifierName"      "modifier_slow_thinker"
+            "Target"            "POINT"
+        }
+    }
+    
+    "Modifiers"
+    {
+        "modifier_slow_thinker"
+        {
+            "Aura"          "modifier_slow"
+            "Aura_Radius"   "%radius"
+            "Aura_Teams"    "DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+            "Aura_Types"    "DOTA_UNIT_TARGET_HERO"
+            "Duration"      "%duration"
+            
+            "OnCreated"
+            {
+                "AttachEffect"
+                {
+                    "EffectName"        "particles/units/heroes/hero_alchemist/alchemist_acid_spray.vpcf"
+                    "EffectAttachType"  "follow_origin"
+                    "Target"            "TARGET"
+                    "ControlPoints"
+                    {
+                        "00" "0 0 0"
+                        "01" "%radius 1 1"
+                        "15" "25 150 25"
+                        "16" "1 0 0"
+                    }
+                }
+            }
+        }
+        "modifier_slow"
+        {
+            "IsDebuff"      "1"
+            "IsHidden"      "0"
+            
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE"    "%movespeed"
+            }
+        }
+    }
+}

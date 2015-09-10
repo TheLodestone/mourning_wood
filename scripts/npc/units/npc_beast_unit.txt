@@ -1,0 +1,69 @@
+"npc_beast_unit"
+{
+    "Model" "models/creeps/neutral_creeps/n_creep_troll_skeleton/n_creep_skeleton_melee.vmdl"
+    "BaseClass" "npc_dota_creature"
+    "ModelScale" "7"
+    "SoundSet"                  "n_creep_Ranged"
+    "GameSoundsFile"            "soundevents/game_sounds_creeps.vsndevts"
+    "Level"                     "25"
+
+    "ArmorPhysical"             "1" 
+    "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageMin"           "1000"        // Damage range min.
+    "AttackDamageMax"           "1000"        // Damage range max.
+    "AttackRate"                "0.5"       // Speed of attack.
+    "AttackAnimationPoint"      "0.4"       // Normalized time in animation cycle to attack.
+    "AttackAcquisitionRange"    "750"       // Range within a target can be acquired.
+    "AttackRange"               "500"       // Range within a target can be attacked.     
+
+    // Bounds
+    //----------------------------------------------------------------
+    "RingRadius"                "40"
+    "HealthBarOffset"           "170"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "24"        // Experience earn.
+    "BountyGoldMin"             "21"        // Gold earned min.
+    "BountyGoldMax"             "29"        // Gold earned max.
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+    "MovementSpeed"             "180"       // Speed.           
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "75"        // Base health.
+    "StatusHealthRegen"         "0.5"       // Health regeneration rate.
+    "StatusMana"                "0"         // Base mana.
+    "StatusManaRegen"           "0.0"       // Mana regeneration rate.       
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1000"       // Range of vision during day light.
+    "VisionNighttimeRange"      "1000"       // Range of vision at night time.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                  "DOTA_TEAM_NEUTRALS"                        // Team name.
+    "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+    "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+    "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Creature Data
+    //----------------------------------------------------------------
+    "Creature"
+    {
+        //Level Up
+        "HPGain"                    "50"
+        "DamageGain"                "2"
+        "ArmorGain"                 "0.25"
+        "MagicResistGain"           "0.1"
+        "MoveSpeedGain"             "1"
+        "BountyGain"                "3"
+        "XPGain"                    "15"
+    }
+    
+    "Ability1"          "beast_unit"     // Ability 1.
+}

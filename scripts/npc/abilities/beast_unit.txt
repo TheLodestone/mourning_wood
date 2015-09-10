@@ -1,0 +1,45 @@
+"beast_unit"
+{
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "ability_datadriven"
+    "AbilityTextureName"    "enchantress_untouchable"
+    "MaxLevel"              "1"
+
+    "OnCreated"
+    {
+        "CreateThinker"
+        {
+            "ModifierName"  "destroy_trees_thinker"
+            "Target"        "CASTER"
+        }
+    }
+    
+    "Modifiers"
+    {
+        "beast_untouchable"
+        {
+            "Passive"   "1"
+            "IsHidden"    "1"
+            "States"
+            {
+                "MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+                //"MODIFIER_STATE_INVULNERABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+                "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED"
+                "MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY"   "MODIFIER_STATE_VALUE_ENABLED"
+            }
+        }
+        "destroy_trees_thinker"
+        {
+            "Duration"      "240"
+            "ThinkInterval" "0.5"
+            "OnIntervalThink"
+            {
+                "DestroyTrees"
+                {
+                    "Target"    "CASTER"
+                    "Radius"    "300"    
+                }
+            }
+        }
+    }
+}
