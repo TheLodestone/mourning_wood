@@ -84,10 +84,23 @@ function GameMode:OnHeroInGame(hero)
   -- This line for example will set the starting gold of every hero to 500 unreliable gold
   hero:SetGold(0, false)
   
+  local player = hero:GetPlayerID()
+  local team = hero:GetTeam()
+  
   local abil = hero:GetAbilityByIndex(0)
   hero:UpgradeAbility(abil)
   local abil = hero:GetAbilityByIndex(1)
   hero:UpgradeAbility(abil)
+  
+  player_tracker[team] = {}
+  
+  player_tracker[team][1] = 0
+  player_tracker[team][2] = 0
+  player_tracker[team][3] = hero
+
+  SendToConsole("dota_camera_center")
+
+  --hero:AddNewModifier(hero,nil,"modifier_stunned",{duration = 30})
 end
 
 --[[
@@ -126,8 +139,7 @@ function GameMode:InitGameMode()
   -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
   Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
 
-  self.good_score = 0
-
+  _G.player_tracker = {}
   
   DebugPrint('[BAREBONES] Done loading Barebones gamemode!\n\n')
 end

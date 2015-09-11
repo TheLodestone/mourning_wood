@@ -1,5 +1,6 @@
 function LumberStacks( event )
     local caster = event.caster
+    local player = caster:GetTeam()
     local ability = event.ability
     local caster_pos = caster:GetAbsOrigin()
     local radius = ability:GetLevelSpecialValueFor("radius", 0)
@@ -15,7 +16,7 @@ function LumberStacks( event )
     
     DebugPrint("Trees: ", count)
     
-    GameRules.GameMode.good_score = GameRules.GameMode.good_score + count
+    player_tracker[player][1] = player_tracker[player][1] + count
     
-    DebugPrint("Current Score: ", GameRules.GameMode.good_score)
+    DebugPrint("Current Score: ", player_tracker[player][1])
 end
