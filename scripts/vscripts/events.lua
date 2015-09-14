@@ -244,9 +244,7 @@ function GameMode:OnEntityKilled( keys )
 
   -- Put code here to handle when an entity gets killed
   local player = killedUnit:GetTeam()
-  player_tracker[player][2] = 1
-  
-  DebugPrintTable ( player_tracker[player] )
+  player_tracker[player]["status"] = 1
   
   local count = 1
     local most_lumber = 0
@@ -255,9 +253,9 @@ function GameMode:OnEntityKilled( keys )
     local kill_track_winner = 0
   
     for Index,Value in pairs(player_tracker) do
-        DebugPrint("Player:",Index,player_tracker[Index][1],player_tracker[Index][2])
-        count = player_tracker[Index][2] * count
-        if player_tracker[Index][3]:IsAlive() == true then
+        DebugPrint("Player:",Index,player_tracker[Index]["lumber"],player_tracker[Index]["status"])
+        count = player_tracker[Index]["status"] * count
+        if player_tracker[Index]["hero"]:IsAlive() == true then
             kill_track = kill_track + 1
             kill_track_winner = Index
         end
@@ -270,8 +268,8 @@ function GameMode:OnEntityKilled( keys )
     else
         DebugPrint("The game is over!")
         for Index,Value in pairs(player_tracker) do
-            if most_lumber < player_tracker[Index][1] and player_tracker[Index][2] > 1 then
-                most_lumber = player_tracker[Index][1]
+            if most_lumber < player_tracker[Index]["lumber"] and player_tracker[Index]["status"] > 1 then
+                most_lumber = player_tracker[Index]["lumber"]
                 winning_team = Index
                 DebugPrint(winning_team,most_lumber)
             end

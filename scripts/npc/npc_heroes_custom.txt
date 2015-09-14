@@ -7,7 +7,7 @@
 	    "SoundSet"          "0" 
 	    "Ability1"        "cut_tree" 
 	    "Ability2"        "machine_sludge" 
-	    "Ability3"        "barebones_empty3" 
+	    "Ability3"        "rocket_boost" 
 	    "Ability4"        "barebones_empty4"
 	    "Ability5"        ""
 	    "Ability6"        ""
@@ -50,8 +50,8 @@
 	
 	    "StatusHealth"        "500"                 // Base health.
 	    "StatusHealthRegen"     "0.0"                 // Health regeneration rate.
-	    "StatusMana"        "50"                   // Base mana.
-	    "StatusManaRegen"     "2"                 // Mana regeneration rate.
+	    "StatusMana"        "100"                   // Base mana.
+	    "StatusManaRegen"     "10"                 // Mana regeneration rate.
 	
 	    "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
 	    "VisionNighttimeRange"    "1800"                  // Range of vision at night time.

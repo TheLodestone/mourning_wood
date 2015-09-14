@@ -14,9 +14,6 @@ function LumberStacks( event )
         count = count + 1
     end
     
-    DebugPrint("Trees: ", count)
+    player_tracker[player]["lumber"] = player_tracker[player]["lumber"] + count
     
-    player_tracker[player][1] = player_tracker[player][1] + count
-    
-    DebugPrint("Current Score: ", player_tracker[player][1])
 end

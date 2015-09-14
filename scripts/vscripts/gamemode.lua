@@ -91,16 +91,24 @@ function GameMode:OnHeroInGame(hero)
   hero:UpgradeAbility(abil)
   local abil = hero:GetAbilityByIndex(1)
   hero:UpgradeAbility(abil)
+  local abil = hero:GetAbilityByIndex(2)
+  hero:UpgradeAbility(abil)
   
   player_tracker[team] = {}
   
-  player_tracker[team][1] = 0
-  player_tracker[team][2] = 0
-  player_tracker[team][3] = hero
+  player_tracker[team]["lumber"] = 0
+  player_tracker[team]["status"] = 0
+  player_tracker[team]["hero"] = hero
+  player_tracker[team]["player"] = player
+  player_tracker[team]["block"] = 0
 
   SendToConsole("dota_camera_center")
 
-  --hero:AddNewModifier(hero,nil,"modifier_stunned",{duration = 30})
+  --hero:AddNewModifier(hero,nil,"modifier_stunned", nil)
+  --local point = Entities:FindByName(nil,"beast_spawner"):GetAbsOrigin()
+  --local creature = CreateUnitByName("npc_beast_unit", point, true, nil, nil, DOTA_TEAM_NEUTRALS)
+  --local waypoint = Entities:FindByName(nil,"start_of_line")
+  --creature:SetInitialGoalEntity(waypoint)
 end
 
 --[[
@@ -115,6 +123,10 @@ function GameMode:OnGameInProgress()
   local creature = CreateUnitByName("npc_beast_unit", point, true, nil, nil, DOTA_TEAM_NEUTRALS)
   local waypoint = Entities:FindByName(nil,"start_of_line")
   creature:SetInitialGoalEntity(waypoint)
+  
+  for Index,Value in pairs(player_tracker) do
+    player_tracker[Index]["hero"]:RemoveModifierByName("modifier_stunned")
+  end
 
   Timers:CreateTimer(30, -- Start this timer 30 game-time seconds later
     function()

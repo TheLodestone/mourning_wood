@@ -1,0 +1,115 @@
+"rocket_boost"
+{
+    // General
+    //-----------------------------------------------------------------------------------------------------------------
+    "BaseClass"             "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+    "AbilityTextureName"    "dark_seer_surge"
+    "MaxLevel"              "1"
+
+    // Casting
+    //-----------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"      "0.0"
+    "AbilityCooldown"       "35"
+    "AbilityChannelTime"    "1.5"
+    
+    // Special
+    //-----------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+        "01"
+        {
+            "var_type"      "FIELD_INTEGER"
+            "distance"        "1000"
+        }
+        "02"
+        {
+            "var_type"      "FIELD_FLOAT"
+            "over_time"     "0.4"
+        }
+    }
+    "precache"
+    {
+        "soundfile"           "soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
+        "soundfile"           "soundevents/game_sounds_heroes/game_sounds_tinker.vsndevts"
+        "particle"            "particles/units/heroes/hero_tinker/tinker_rockets_arrow.vpcf"
+        
+    }
+    "OnSpellStart"
+    {
+        "FireSound"
+        {
+            "EffectName"    "Hero_Tinker.RearmStart"
+            "Target"        "CASTER"
+        }
+    }
+    "OnChannelSucceeded"
+    {
+        "FireSound"
+        {
+            "EffectName"    "Hero_Rattletrap.Rocket_Flare.Fire"
+            "Target"        "CASTER"
+        }
+        "RunScript"
+        {
+            "ScriptFile"    "scripts/vscripts/mechanics/rocket_boost.lua"
+            "Function"      "rocket_boost_start"
+            "Target"        "POINT"
+        }
+        "CreateThinker"
+        {
+            "ModifierName"  "rocket_boost_thinker"
+            "Target"        "CASTER"
+        }
+        "ApplyModifier"
+        {
+            "ModifierName"  "animation_modifier"
+            "Target"        "CASTER"
+        }
+    }
+    "Modifiers"
+    {
+        "rocket_boost_thinker"
+        {
+            "Duration"      "%over_time"
+            "ThinkInterval" "0.01"
+            "OnCreated"
+            {
+                "AttachEffect"
+                {
+                    "EffectName"    "particles/units/heroes/hero_tinker/tinker_rockets_arrow.vpcf"
+                    "EffectAttachType"  "follow_origin"
+                    "Target"        "CASTER"
+                }
+            }
+            "OnIntervalThink"
+            {
+                "RunScript"
+                {
+                    "ScriptFile"    "scripts/vscripts/mechanics/rocket_boost.lua"
+                    "Function"      "rocket_boost"
+                    "Target"        "POINT"
+                }
+                "DestroyTrees"
+                {
+                    "Target"        "CASTER"
+                    "Radius"        "125"
+                }
+            }
+            "OnDestroy"
+            {
+                "RunScript"
+                {
+                    "ScriptFile"    "scripts/vscripts/mechanics/rocket_boost.lua"
+                    "Function"      "rocket_boost_end"
+                    "Target"        "CASTER"
+                }
+            }
+        }
+        "animation_modifier"
+        {
+            "OverrideAnimation" "ACT_DOTA_FLAIL"
+            "Duration"      "%over_time"
+        }
+    }
+}
