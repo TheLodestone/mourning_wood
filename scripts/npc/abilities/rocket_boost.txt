@@ -10,7 +10,7 @@
     // Casting
     //-----------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"      "0.0"
-    "AbilityCooldown"       "35"
+    "AbilityCooldown"       "40"
     "AbilityChannelTime"    "1.5"
     
     // Special

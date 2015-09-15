@@ -1,0 +1,20 @@
+"lead_vision"
+{
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "ability_datadriven"
+    "AbilityTextureName"    "slardar_amplify_damage"
+    "MaxLevel"              "1"
+   
+    "Modifiers"
+    {
+        "vision_states"
+        {
+            "Passive"   "1"
+            "IsHidden"    "1"
+            "States"
+            {
+                "MODIFIER_STATE_PROVIDES_VISION"   "MODIFIER_STATE_VALUE_ENABLED"
+            }
+        }
+    }
+}

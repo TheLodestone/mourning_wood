@@ -127,11 +127,63 @@ function GameMode:OnGameInProgress()
   for Index,Value in pairs(player_tracker) do
     player_tracker[Index]["hero"]:RemoveModifierByName("modifier_stunned")
   end
+  
+  _G.new_time = 0.25
+  GameRules:SetTimeOfDay(new_time)
 
   Timers:CreateTimer(30, -- Start this timer 30 game-time seconds later
     function()
       DebugPrint("This function is called 30 seconds after the game begins, and every 30 seconds thereafter")
       return 30.0 -- Rerun this timer every 30 game-time seconds 
+    end)
+  Timers:CreateTimer(0.1,
+    function()
+        new_time = new_time + 0.5 / 600
+        if new_time >= 1 then
+            new_time = new_time - 1
+        end
+        GameRules:SetTimeOfDay( new_time )
+        if new_time >= 0.75 or new_time < 0.25 then
+            mode:SetFogOfWarDisabled(false)
+            local most_lumber = 0
+            local highest_lumber = 0
+            local give_vision = {}
+            local give_vision_hero = {}
+            local remaining_teams = {}
+            for Index,Value in pairs(player_tracker) do
+                if most_lumber < player_tracker[Index]["lumber"] and player_tracker[Index]["status"] == 0 then
+                    highest_lumber = player_tracker[Index]["lumber"]
+                    most_lumber = player_tracker[Index]["lumber"]
+                end
+            end
+            for Index,Value in pairs(player_tracker) do
+                if highest_lumber <= player_tracker[Index]["lumber"] and player_tracker[Index]["status"] == 0 then
+                    table.insert(give_vision,Index)
+                    table.insert(give_vision_hero,player_tracker[Index]["hero"])
+                    most_lumber = player_tracker[Index]["lumber"]
+                end
+            end
+            DebugPrintTable(give_vision)
+            DebugPrintTable(give_vision_hero)
+            for Index,Value in pairs(player_tracker) do
+                for k,v in pairs(give_vision) do
+                    if v ~= Index then
+                        table.insert(remaining_teams, Index)
+                    end
+                end
+            end
+            DebugPrintTable(remaining_teams)
+            for Index,Value in pairs(remaining_teams) do
+                for k,v in pairs(give_vision_hero) do
+                    if Value ~= v:GetTeam() then
+                        AddFOWViewer(remaining_teams[Index],v:GetAbsOrigin(),500,0.1,false)
+                    end
+                end
+            end
+        else
+            mode:SetFogOfWarDisabled(true)
+        end
+        return 0.1
     end)
 end
 

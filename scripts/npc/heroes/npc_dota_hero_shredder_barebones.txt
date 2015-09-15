@@ -52,5 +52,5 @@
     "StatusManaRegen"     "10"                 // Mana regeneration rate.
 
     "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
-    "VisionNighttimeRange"    "1800"                  // Range of vision at night time.
+    "VisionNighttimeRange"    "600"                  // Range of vision at night time.
   }

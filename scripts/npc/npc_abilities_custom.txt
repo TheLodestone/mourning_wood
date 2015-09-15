@@ -129,7 +129,7 @@
 	        "01"
 	        {
 	            "var_type"      "FIELD_INTEGER"
-	            "radius"        "250"
+	            "radius"        "200"
 	        }
 	    }
 	    
@@ -139,7 +139,7 @@
 	        {
 	            "EffectName"    "Hero_Shredder.WhirlingDeath.Cast"
 	        }
-	        "AttachEffect"
+	        "FireEffect"
 	        {
 	            "EffectName"        "particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
 	            "EffectAttachType"  "follow_origin"
@@ -380,6 +380,26 @@
 	      }
 	    }
 	  }
+	"lead_vision"
+	{
+	    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "BaseClass"             "ability_datadriven"
+	    "AbilityTextureName"    "slardar_amplify_damage"
+	    "MaxLevel"              "1"
+	   
+	    "Modifiers"
+	    {
+	        "vision_states"
+	        {
+	            "Passive"   "1"
+	            "IsHidden"    "1"
+	            "States"
+	            {
+	                "MODIFIER_STATE_PROVIDES_VISION"   "MODIFIER_STATE_VALUE_ENABLED"
+	            }
+	        }
+	    }
+	}
 	"machine_sludge"
 	{
 	    // General
@@ -393,7 +413,7 @@
 	    // Casting
 	    //-----------------------------------------------------------------------------------------------------------------
 	    "AbilityCastPoint"      "0.2"
-	    "AbilityCooldown"       "15"
+	    "AbilityCooldown"       "12"
 	    
 	    // Special
 	    //-----------------------------------------------------------------------------------------------------------------
@@ -427,8 +447,8 @@
 	        "FireSound"
 	        {
 	            "EffectName"    "Hero_Batrider.StickyNapalm.Impact"
+	            "Target"        "POINT"
 	        }
-	
 	        "CreateThinker"
 	        {
 	            "ModifierName"      "modifier_slow_thinker"
@@ -451,16 +471,14 @@
 	                "AttachEffect"
 	                {
 	                    "EffectName"        "particles/units/heroes/hero_alchemist/alchemist_acid_spray.vpcf"
-	                    "EffectColorA"      "10 10 10"
-	                    "EffectColorB"      "10 10 10"
 	                    "EffectAttachType"  "follow_origin"
 	                    "Target"            "TARGET"
 	                    "ControlPoints"
 	                    {
 	                        "00" "0 0 0"
 	                        "01" "%radius 1 1"
-	                        "15" "25 150 25"
-	                        "16" "1 0 0"
+	                        "15" "10 10 10"
+	                        "16" "10 10 10"
 	                    }
 	                }
 	            }
@@ -489,7 +507,7 @@
 	    // Casting
 	    //-----------------------------------------------------------------------------------------------------------------
 	    "AbilityCastPoint"      "0.0"
-	    "AbilityCooldown"       "35"
+	    "AbilityCooldown"       "40"
 	    "AbilityChannelTime"    "1.5"
 	    
 	    // Special

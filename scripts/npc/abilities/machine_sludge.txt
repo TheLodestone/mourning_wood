@@ -11,7 +11,7 @@
     // Casting
     //-----------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"      "0.2"
-    "AbilityCooldown"       "15"
+    "AbilityCooldown"       "12"
     
     // Special
     //-----------------------------------------------------------------------------------------------------------------
@@ -45,8 +45,8 @@
         "FireSound"
         {
             "EffectName"    "Hero_Batrider.StickyNapalm.Impact"
+            "Target"        "POINT"
         }
-
         "CreateThinker"
         {
             "ModifierName"      "modifier_slow_thinker"
@@ -69,16 +69,14 @@
                 "AttachEffect"
                 {
                     "EffectName"        "particles/units/heroes/hero_alchemist/alchemist_acid_spray.vpcf"
-                    "EffectColorA"      "10 10 10"
-                    "EffectColorB"      "10 10 10"
                     "EffectAttachType"  "follow_origin"
                     "Target"            "TARGET"
                     "ControlPoints"
                     {
                         "00" "0 0 0"
                         "01" "%radius 1 1"
-                        "15" "25 150 25"
-                        "16" "1 0 0"
+                        "15" "10 10 10"
+                        "16" "10 10 10"
                     }
                 }
             }
