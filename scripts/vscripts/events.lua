@@ -321,7 +321,7 @@ function GameMode:OnEntityKilled( keys )
     beast:SetModelScale(1.5)
     local waypoint = Entities:FindByName(nil,"start_of_line_1_start")
     beast:SetInitialGoalEntity(waypoint)
-    beast:SetBaseMoveSpeed(265)
+    beast:SetBaseMoveSpeed(250)
     
     local point = Entities:FindByName(nil,"start_of_line_2_start"):GetAbsOrigin()
     local beast = CreateUnitByName("npc_beast_unit", point, true, nil, nil, DOTA_TEAM_NEUTRALS)

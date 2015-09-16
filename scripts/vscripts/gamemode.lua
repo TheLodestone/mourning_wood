@@ -105,10 +105,6 @@ function GameMode:OnHeroInGame(hero)
   SendToConsole("dota_camera_center")
 
   hero:AddNewModifier(hero,nil,"modifier_stunned", nil)
-  --local point = Entities:FindByName(nil,"beast_spawner"):GetAbsOrigin()
-  --local creature = CreateUnitByName("npc_beast_unit", point, true, nil, nil, DOTA_TEAM_NEUTRALS)
-  --local waypoint = Entities:FindByName(nil,"start_of_line")
-  --creature:SetInitialGoalEntity(waypoint)
 end
 
 --[[
@@ -119,6 +115,7 @@ end
 function GameMode:OnGameInProgress()
   DebugPrint("[BAREBONES] The game has officially begun")
   
+
   local point = Entities:FindByName(nil,"start_of_line"):GetAbsOrigin()
   boss_unit = CreateUnitByName("npc_beast_unit", point, true, nil, nil, DOTA_TEAM_NEUTRALS)
   local waypoint = Entities:FindByName(nil,"start_of_line")
@@ -136,7 +133,7 @@ function GameMode:OnGameInProgress()
         local ability_level = hero:GetAbilityByIndex(0):GetLevel()
         hero:RemoveAbility(hero:GetAbilityByIndex(0):GetAbilityName())
         if num_players == 1 then
-            hero:AddAbility("cut_tree_8_players")
+            hero:AddAbility("cut_tree_1_player")
         end
         if num_players == 2 then
             hero:AddAbility("cut_tree_2_players")
