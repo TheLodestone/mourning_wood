@@ -80,6 +80,11 @@
                     "EffectName"    "particles/units/heroes/hero_tinker/tinker_rockets_arrow.vpcf"
                     "EffectAttachType"  "follow_origin"
                     "Target"        "CASTER"
+                    "ControlPointEntities"
+                    {
+                        "CASTER"    "attach_hitloc"
+                        "CASTER"    "attach_hitloc"
+                    }
                 }
             }
             "OnIntervalThink"

@@ -69,7 +69,16 @@
 	
 	    "OnCreated"
 	    {
-	        "CreateThinker"
+	        "ApplyModifier"
+	        {
+	            "ModifierName"  "destroy_trees_thinker"
+	            "Target"        "CASTER"
+	        }
+	    }
+	    
+	    "OnDeath"
+	    {
+	        "RemoveModifier"
 	        {
 	            "ModifierName"  "destroy_trees_thinker"
 	            "Target"        "CASTER"
@@ -84,7 +93,7 @@
 	            "IsHidden"    "1"
 	            "States"
 	            {
-	                "MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+	                //"MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
 	                "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED"
 	                "MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY"   "MODIFIER_STATE_VALUE_ENABLED"
 	            }
@@ -108,7 +117,63 @@
 	        }
 	    }
 	}
-	"cut_tree"
+	"cut_tree_2_players"
+	{
+	    // General
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "BaseClass"             "ability_datadriven"
+	    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityTextureName"    "shredder_whirling_death"
+	    "MaxLevel"              "3"
+	
+	    // Casting
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilityCastPoint"      "0.0"
+	    "AbilityCooldown"       "2 1.5 1"
+	    
+	    // Special
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"      "FIELD_INTEGER"
+	            "radius"        "275"
+	        }
+	    }
+	    
+	    "OnSpellStart"
+	    {
+	        "FireSound"
+	        {
+	            "EffectName"    "Hero_Shredder.WhirlingDeath.Cast"
+	        }
+	        "FireEffect"
+	        {
+	            "EffectName"        "particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
+	            "EffectAttachType"  "attach_hitloc"
+	            "Target"            "CASTER"
+	            "ControlPointEntities"
+	            {
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	            }
+	        }
+	        "RunScript"
+	        {
+	            "ScriptFile"    "scripts/vscripts/mechanics/lumber.lua"
+	            "Function"      "LumberStacks"
+	        }
+	        "DestroyTrees"
+	        {
+	            "Target"        "CASTER"
+	            "Radius"        "%radius"
+	        }
+	    }
+	}
+	"cut_tree_3_players"
 	{
 	    // General
 	    //-----------------------------------------------------------------------------------------------------------------
@@ -129,7 +194,7 @@
 	        "01"
 	        {
 	            "var_type"      "FIELD_INTEGER"
-	            "radius"        "200"
+	            "radius"        "275"
 	        }
 	    }
 	    
@@ -142,8 +207,295 @@
 	        "FireEffect"
 	        {
 	            "EffectName"        "particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
-	            "EffectAttachType"  "follow_origin"
+	            "EffectAttachType"  "attach_hitloc"
 	            "Target"            "CASTER"
+	            "ControlPointEntities"
+	            {
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	            }
+	        }
+	        "RunScript"
+	        {
+	            "ScriptFile"    "scripts/vscripts/mechanics/lumber.lua"
+	            "Function"      "LumberStacks"
+	        }
+	        "DestroyTrees"
+	        {
+	            "Target"        "CASTER"
+	            "Radius"        "%radius"
+	        }
+	    }
+	}
+	"cut_tree_4_players"
+	{
+	    // General
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "BaseClass"             "ability_datadriven"
+	    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityTextureName"    "shredder_whirling_death"
+	    "MaxLevel"              "3"
+	
+	    // Casting
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilityCastPoint"      "0.0"
+	    "AbilityCooldown"       "4 2.5 1"
+	    
+	    // Special
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"      "FIELD_INTEGER"
+	            "radius"        "275"
+	        }
+	    }
+	    
+	    "OnSpellStart"
+	    {
+	        "FireSound"
+	        {
+	            "EffectName"    "Hero_Shredder.WhirlingDeath.Cast"
+	        }
+	        "FireEffect"
+	        {
+	            "EffectName"        "particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
+	            "EffectAttachType"  "attach_hitloc"
+	            "Target"            "CASTER"
+	            "ControlPointEntities"
+	            {
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	            }
+	        }
+	        "RunScript"
+	        {
+	            "ScriptFile"    "scripts/vscripts/mechanics/lumber.lua"
+	            "Function"      "LumberStacks"
+	        }
+	        "DestroyTrees"
+	        {
+	            "Target"        "CASTER"
+	            "Radius"        "%radius"
+	        }
+	    }
+	}
+	"cut_tree_5_players"
+	{
+	    // General
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "BaseClass"             "ability_datadriven"
+	    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityTextureName"    "shredder_whirling_death"
+	    "MaxLevel"              "3"
+	
+	    // Casting
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilityCastPoint"      "0.0"
+	    "AbilityCooldown"       "5 3 1"
+	    
+	    // Special
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"      "FIELD_INTEGER"
+	            "radius"        "275"
+	        }
+	    }
+	    
+	    "OnSpellStart"
+	    {
+	        "FireSound"
+	        {
+	            "EffectName"    "Hero_Shredder.WhirlingDeath.Cast"
+	        }
+	        "FireEffect"
+	        {
+	            "EffectName"        "particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
+	            "EffectAttachType"  "attach_hitloc"
+	            "Target"            "CASTER"
+	            "ControlPointEntities"
+	            {
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	            }
+	        }
+	        "RunScript"
+	        {
+	            "ScriptFile"    "scripts/vscripts/mechanics/lumber.lua"
+	            "Function"      "LumberStacks"
+	        }
+	        "DestroyTrees"
+	        {
+	            "Target"        "CASTER"
+	            "Radius"        "%radius"
+	        }
+	    }
+	}
+	"cut_tree_6_players"
+	{
+	    // General
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "BaseClass"             "ability_datadriven"
+	    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityTextureName"    "shredder_whirling_death"
+	    "MaxLevel"              "3"
+	
+	    // Casting
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilityCastPoint"      "0.0"
+	    "AbilityCooldown"       "6 3.5 1"
+	    
+	    // Special
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"      "FIELD_INTEGER"
+	            "radius"        "275"
+	        }
+	    }
+	    
+	    "OnSpellStart"
+	    {
+	        "FireSound"
+	        {
+	            "EffectName"    "Hero_Shredder.WhirlingDeath.Cast"
+	        }
+	        "FireEffect"
+	        {
+	            "EffectName"        "particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
+	            "EffectAttachType"  "attach_hitloc"
+	            "Target"            "CASTER"
+	            "ControlPointEntities"
+	            {
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	            }
+	        }
+	        "RunScript"
+	        {
+	            "ScriptFile"    "scripts/vscripts/mechanics/lumber.lua"
+	            "Function"      "LumberStacks"
+	        }
+	        "DestroyTrees"
+	        {
+	            "Target"        "CASTER"
+	            "Radius"        "%radius"
+	        }
+	    }
+	}
+	"cut_tree_7_players"
+	{
+	    // General
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "BaseClass"             "ability_datadriven"
+	    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityTextureName"    "shredder_whirling_death"
+	    "MaxLevel"              "3"
+	
+	    // Casting
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilityCastPoint"      "0.0"
+	    "AbilityCooldown"       "7 4 1"
+	    
+	    // Special
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"      "FIELD_INTEGER"
+	            "radius"        "275"
+	        }
+	    }
+	    
+	    "OnSpellStart"
+	    {
+	        "FireSound"
+	        {
+	            "EffectName"    "Hero_Shredder.WhirlingDeath.Cast"
+	        }
+	        "FireEffect"
+	        {
+	            "EffectName"        "particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
+	            "EffectAttachType"  "attach_hitloc"
+	            "Target"            "CASTER"
+	            "ControlPointEntities"
+	            {
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	            }
+	        }
+	        "RunScript"
+	        {
+	            "ScriptFile"    "scripts/vscripts/mechanics/lumber.lua"
+	            "Function"      "LumberStacks"
+	        }
+	        "DestroyTrees"
+	        {
+	            "Target"        "CASTER"
+	            "Radius"        "%radius"
+	        }
+	    }
+	}
+	"cut_tree_8_players"
+	{
+	    // General
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "BaseClass"             "ability_datadriven"
+	    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityTextureName"    "shredder_whirling_death"
+	    "MaxLevel"              "3"
+	
+	    // Casting
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilityCastPoint"      "0.0"
+	    "AbilityCooldown"       "8 4.5 1"
+	    
+	    // Special
+	    //-----------------------------------------------------------------------------------------------------------------
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"      "FIELD_INTEGER"
+	            "radius"        "275"
+	        }
+	    }
+	    
+	    "OnSpellStart"
+	    {
+	        "FireSound"
+	        {
+	            "EffectName"    "Hero_Shredder.WhirlingDeath.Cast"
+	        }
+	        "FireEffect"
+	        {
+	            "EffectName"        "particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
+	            "EffectAttachType"  "attach_hitloc"
+	            "Target"            "CASTER"
+	            "ControlPointEntities"
+	            {
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	                "CASTER"        "attach_hitloc"
+	            }
 	        }
 	        "RunScript"
 	        {
@@ -447,7 +799,6 @@
 	        "FireSound"
 	        {
 	            "EffectName"    "Hero_Batrider.StickyNapalm.Impact"
-	            "Target"        "POINT"
 	        }
 	        "CreateThinker"
 	        {
@@ -577,6 +928,11 @@
 	                    "EffectName"    "particles/units/heroes/hero_tinker/tinker_rockets_arrow.vpcf"
 	                    "EffectAttachType"  "follow_origin"
 	                    "Target"        "CASTER"
+	                    "ControlPointEntities"
+	                    {
+	                        "CASTER"    "attach_hitloc"
+	                        "CASTER"    "attach_hitloc"
+	                    }
 	                }
 	            }
 	            "OnIntervalThink"

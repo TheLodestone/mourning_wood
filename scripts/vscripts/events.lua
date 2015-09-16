@@ -10,7 +10,41 @@ function GameMode:OnDisconnect(keys)
   local networkid = keys.networkid
   local reason = keys.reason
   local userid = keys.userid
+  local team = PlayerResource:GetTeam(userid)
+  local num_players = 0
+    
+  player_tracker_discon[team] = player_tracker[team]
+  player_tracker[team] = nil
+  
+  for Index,Value in pairs(player_tracker) do
+    num_players = num_players + 1
+  end
 
+  
+    for Index,Value in pairs(player_tracker) do
+        local hero = player_tracker[Index]["hero"]
+        local ability_level = hero:GetAbilityByIndex(0):GetLevel()
+        hero:RemoveAbility(hero:GetAbilityByIndex(0):GetAbilityName())
+        if num_players == 2 then
+            hero:AddAbility("cut_tree_2_players")
+        end
+        if num_players == 3 then
+            hero:AddAbility("cut_tree_3_players")
+        end
+        if num_players == 4 then
+            hero:AddAbility("cut_tree_4_players")
+        end
+        if num_players == 5 then
+            hero:AddAbility("cut_tree_5_players")
+        end
+        if num_players == 6 then
+            hero:AddAbility("cut_tree_6_players")
+        end
+        if num_players == 7 then
+            hero:AddAbility("cut_tree_7_players")
+        end
+        hero:GetAbilityByIndex(0):SetLevel(ability_level)
+    end
 end
 -- The overall game state has changed
 function GameMode:OnGameRulesStateChange(keys)
@@ -70,6 +104,43 @@ end
 function GameMode:OnPlayerReconnect(keys)
   DebugPrint( '[BAREBONES] OnPlayerReconnect' )
   DebugPrintTable(keys) 
+  local team = PlayerResource:GetTeam(userid)
+  local num_players = 0
+  
+  player_tracker[team] = player_tracker_discon[team]
+  player_tracker_discon[team] = nil
+  
+  for Index,Value in pairs(player_tracker) do
+    num_players = num_players + 1
+  end
+  
+    for Index,Value in pairs(player_tracker) do
+        local hero = player_tracker[Index]["hero"]
+        local ability_level = hero:GetAbilityByIndex(0):GetLevel()
+        hero:RemoveAbility(hero:GetAbilityByIndex(0):GetAbilityName())
+        if num_players == 2 then
+            hero:AddAbility("cut_tree_2_players")
+        end
+        if num_players == 3 then
+            hero:AddAbility("cut_tree_3_players")
+        end
+        if num_players == 4 then
+            hero:AddAbility("cut_tree_4_players")
+        end
+        if num_players == 5 then
+            hero:AddAbility("cut_tree_5_players")
+        end
+        if num_players == 6 then
+            hero:AddAbility("cut_tree_6_players")
+        end
+        if num_players == 7 then
+            hero:AddAbility("cut_tree_7_players")
+        end
+        if num_players == 8 then
+            hero:AddAbility("cut_tree_8_players")
+        end
+        hero:GetAbilityByIndex(0):SetLevel(ability_level)
+    end
 end
 
 -- An item was purchased by a player
@@ -243,40 +314,60 @@ function GameMode:OnEntityKilled( keys )
   local damagebits = keys.damagebits -- This might always be 0 and therefore useless
 
   -- Put code here to handle when an entity gets killed
+  
+  if boss_unit == killedUnit then
+    local point = Entities:FindByName(nil,"start_of_line_1_start"):GetAbsOrigin()
+    local beast = CreateUnitByName("npc_beast_unit", point, true, nil, nil, DOTA_TEAM_NEUTRALS)
+    beast:SetModelScale(1.5)
+    local waypoint = Entities:FindByName(nil,"start_of_line_1_start")
+    beast:SetInitialGoalEntity(waypoint)
+    beast:SetBaseMoveSpeed(265)
+    
+    local point = Entities:FindByName(nil,"start_of_line_2_start"):GetAbsOrigin()
+    local beast = CreateUnitByName("npc_beast_unit", point, true, nil, nil, DOTA_TEAM_NEUTRALS)
+    beast:SetModelScale(1.5)
+    local waypoint = Entities:FindByName(nil,"start_of_line_2_start")
+    beast:SetInitialGoalEntity(waypoint)
+    beast:SetBaseMoveSpeed(240)
+  end
+  
   local player = killedUnit:GetTeam()
-  player_tracker[player]["status"] = 1
-  
-  local count = 1
-    local most_lumber = 0
-    local winning_team = 0
-    local kill_track = 0
-    local kill_track_winner = 0
-  
     for Index,Value in pairs(player_tracker) do
-        DebugPrint("Player:",Index,player_tracker[Index]["lumber"],player_tracker[Index]["status"])
-        count = player_tracker[Index]["status"] * count
-        if player_tracker[Index]["hero"]:IsAlive() == true then
-            kill_track = kill_track + 1
-            kill_track_winner = Index
-        end
-    end
-    if count == 0 then
-        DebugPrint("The game continues!")
-        if kill_track == 1 then
-            GameRules:SetGameWinner(kill_track_winner)
-        end
-    else
-        DebugPrint("The game is over!")
-        for Index,Value in pairs(player_tracker) do
-            if most_lumber < player_tracker[Index]["lumber"] and player_tracker[Index]["status"] > 1 then
-                most_lumber = player_tracker[Index]["lumber"]
-                winning_team = Index
-                DebugPrint(winning_team,most_lumber)
+        if Index == player then
+            player_tracker[player]["status"] = 1
+
+            local count = 1
+            local most_lumber = 0
+            local winning_team = 0
+            local kill_track = 0
+            local kill_track_winner = 0
+
+            for Index,Value in pairs(player_tracker) do
+                DebugPrint("Player:",Index,player_tracker[Index]["lumber"],player_tracker[Index]["status"])
+                count = player_tracker[Index]["status"] * count
+                if player_tracker[Index]["hero"]:IsAlive() == true then
+                    kill_track = kill_track + 1
+                    kill_track_winner = Index
+                end
+            end
+            if count == 0 then
+                DebugPrint("The game continues!")
+                if kill_track == 1 then
+                    GameRules:SetGameWinner(kill_track_winner)
+                end
+            else
+                DebugPrint("The game is over!")
+                for Index,Value in pairs(player_tracker) do
+                    if most_lumber < player_tracker[Index]["lumber"] and player_tracker[Index]["status"] > 1 then
+                        most_lumber = player_tracker[Index]["lumber"]
+                        winning_team = Index
+                        DebugPrint(winning_team,most_lumber)
+                    end
+                end
+                GameRules:SetGameWinner(winning_team)
             end
         end
-        GameRules:SetGameWinner(winning_team)
     end
-  
 end
 
 
@@ -365,4 +456,8 @@ function GameMode:OnNPCGoalReached(keys)
   local goalEntity = EntIndexToHScript(keys.goal_entindex)
   local nextGoalEntity = EntIndexToHScript(keys.next_goal_entindex)
   local npc = EntIndexToHScript(keys.npc_entindex)
+  
+  if nextGoalEntity == nil and npc == boss_unit then
+    npc:ForceKill(false)
+  end
 end

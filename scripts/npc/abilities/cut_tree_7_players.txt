@@ -1,0 +1,56 @@
+"cut_tree_7_players"
+{
+    // General
+    //-----------------------------------------------------------------------------------------------------------------
+    "BaseClass"             "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityTextureName"    "shredder_whirling_death"
+    "MaxLevel"              "3"
+
+    // Casting
+    //-----------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"      "0.0"
+    "AbilityCooldown"       "7 4 1"
+    
+    // Special
+    //-----------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+        "01"
+        {
+            "var_type"      "FIELD_INTEGER"
+            "radius"        "275"
+        }
+    }
+    
+    "OnSpellStart"
+    {
+        "FireSound"
+        {
+            "EffectName"    "Hero_Shredder.WhirlingDeath.Cast"
+        }
+        "FireEffect"
+        {
+            "EffectName"        "particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
+            "EffectAttachType"  "attach_hitloc"
+            "Target"            "CASTER"
+            "ControlPointEntities"
+            {
+                "CASTER"        "attach_hitloc"
+                "CASTER"        "attach_hitloc"
+                "CASTER"        "attach_hitloc"
+                "CASTER"        "attach_hitloc"
+            }
+        }
+        "RunScript"
+        {
+            "ScriptFile"    "scripts/vscripts/mechanics/lumber.lua"
+            "Function"      "LumberStacks"
+        }
+        "DestroyTrees"
+        {
+            "Target"        "CASTER"
+            "Radius"        "%radius"
+        }
+    }
+}

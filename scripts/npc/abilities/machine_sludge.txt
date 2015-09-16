@@ -45,7 +45,6 @@
         "FireSound"
         {
             "EffectName"    "Hero_Batrider.StickyNapalm.Impact"
-            "Target"        "POINT"
         }
         "CreateThinker"
         {

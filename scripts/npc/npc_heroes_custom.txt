@@ -2,13 +2,13 @@
 {
 	"npc_dota_hero_shredder_barebones"
 	  {
-	    "AbilityLayout"     "4"
+	    "AbilityLayout"     "3"
 	    "override_hero"     "npc_dota_hero_shredder"
 	    "SoundSet"          "0" 
-	    "Ability1"        "cut_tree" 
+	    "Ability1"        "cut_tree_8_players" 
 	    "Ability2"        "machine_sludge" 
 	    "Ability3"        "rocket_boost" 
-	    "Ability4"        "barebones_empty4"
+	    "Ability4"        ""
 	    "Ability5"        ""
 	    "Ability6"        ""
 	    "Ability7"        ""
@@ -50,8 +50,8 @@
 	
 	    "StatusHealth"        "500"                 // Base health.
 	    "StatusHealthRegen"     "0.0"                 // Health regeneration rate.
-	    "StatusMana"        "100"                   // Base mana.
-	    "StatusManaRegen"     "10"                 // Mana regeneration rate.
+	    "StatusMana"        "0"                   // Base mana.
+	    "StatusManaRegen"     "0"                 // Mana regeneration rate.
 	
 	    "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
 	    "VisionNighttimeRange"    "600"                  // Range of vision at night time.

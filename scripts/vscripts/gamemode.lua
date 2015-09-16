@@ -5,6 +5,10 @@
 -- You can also change the cvar 'barebones_spew' at any time to 1 or 0 for output/no output
 BAREBONES_DEBUG_SPEW = true 
 
+_G.player_tracker = {}
+_G.player_tracker_discon = {}
+_G.boss_unit = nil
+  
 if GameMode == nil then
     DebugPrint( '[BAREBONES] creating barebones game mode' )
     _G.GameMode = class({})
@@ -87,11 +91,7 @@ function GameMode:OnHeroInGame(hero)
   local player = hero:GetPlayerID()
   local team = hero:GetTeam()
   
-  local abil = hero:GetAbilityByIndex(0)
-  hero:UpgradeAbility(abil)
-  local abil = hero:GetAbilityByIndex(1)
-  hero:UpgradeAbility(abil)
-  local abil = hero:GetAbilityByIndex(2)
+  abil = hero:GetAbilityByIndex(0)
   hero:UpgradeAbility(abil)
   
   player_tracker[team] = {}
@@ -104,7 +104,7 @@ function GameMode:OnHeroInGame(hero)
 
   SendToConsole("dota_camera_center")
 
-  --hero:AddNewModifier(hero,nil,"modifier_stunned", nil)
+  hero:AddNewModifier(hero,nil,"modifier_stunned", nil)
   --local point = Entities:FindByName(nil,"beast_spawner"):GetAbsOrigin()
   --local creature = CreateUnitByName("npc_beast_unit", point, true, nil, nil, DOTA_TEAM_NEUTRALS)
   --local waypoint = Entities:FindByName(nil,"start_of_line")
@@ -119,14 +119,48 @@ end
 function GameMode:OnGameInProgress()
   DebugPrint("[BAREBONES] The game has officially begun")
   
-  local point = Entities:FindByName(nil,"beast_spawner"):GetAbsOrigin()
-  local creature = CreateUnitByName("npc_beast_unit", point, true, nil, nil, DOTA_TEAM_NEUTRALS)
+  local point = Entities:FindByName(nil,"start_of_line"):GetAbsOrigin()
+  boss_unit = CreateUnitByName("npc_beast_unit", point, true, nil, nil, DOTA_TEAM_NEUTRALS)
   local waypoint = Entities:FindByName(nil,"start_of_line")
-  creature:SetInitialGoalEntity(waypoint)
+  boss_unit:SetInitialGoalEntity(waypoint)
+  
+  local num_players = 0
   
   for Index,Value in pairs(player_tracker) do
     player_tracker[Index]["hero"]:RemoveModifierByName("modifier_stunned")
+    num_players = num_players + 1
   end
+  
+    for Index,Value in pairs(player_tracker) do
+        local hero = player_tracker[Index]["hero"]
+        local ability_level = hero:GetAbilityByIndex(0):GetLevel()
+        hero:RemoveAbility(hero:GetAbilityByIndex(0):GetAbilityName())
+        if num_players == 1 then
+            hero:AddAbility("cut_tree_8_players")
+        end
+        if num_players == 2 then
+            hero:AddAbility("cut_tree_2_players")
+        end
+        if num_players == 3 then
+            hero:AddAbility("cut_tree_3_players")
+        end
+        if num_players == 4 then
+            hero:AddAbility("cut_tree_4_players")
+        end
+        if num_players == 5 then
+            hero:AddAbility("cut_tree_5_players")
+        end
+        if num_players == 6 then
+            hero:AddAbility("cut_tree_6_players")
+        end
+        if num_players == 7 then
+            hero:AddAbility("cut_tree_7_players")
+        end
+        if num_players == 8 then
+            hero:AddAbility("cut_tree_8_players")
+        end
+        hero:GetAbilityByIndex(0):SetLevel(ability_level)
+    end
   
   _G.new_time = 0.25
   GameRules:SetTimeOfDay(new_time)
@@ -136,6 +170,19 @@ function GameMode:OnGameInProgress()
       DebugPrint("This function is called 30 seconds after the game begins, and every 30 seconds thereafter")
       return 30.0 -- Rerun this timer every 30 game-time seconds 
     end)
+    
+  Timers:CreateTimer(60,
+    function()
+        for Index,Value in pairs(player_tracker) do
+            player_tracker[Index]["hero"]:HeroLevelUp(true)
+        end
+        if boss_unit:IsAlive() == true then
+            local beast_ms = boss_unit:GetBaseMoveSpeed()
+            boss_unit:SetBaseMoveSpeed(beast_ms + 12)
+        end
+        return 60
+    end)
+    
   Timers:CreateTimer(0.1,
     function()
         new_time = new_time + 0.5 / 600
@@ -144,7 +191,7 @@ function GameMode:OnGameInProgress()
         end
         GameRules:SetTimeOfDay( new_time )
         if new_time >= 0.75 or new_time < 0.25 then
-            mode:SetFogOfWarDisabled(false)
+            --mode:SetFogOfWarDisabled(false)
             local most_lumber = 0
             local highest_lumber = 0
             local give_vision = {}
@@ -163,8 +210,6 @@ function GameMode:OnGameInProgress()
                     most_lumber = player_tracker[Index]["lumber"]
                 end
             end
-            DebugPrintTable(give_vision)
-            DebugPrintTable(give_vision_hero)
             for Index,Value in pairs(player_tracker) do
                 for k,v in pairs(give_vision) do
                     if v ~= Index then
@@ -172,7 +217,6 @@ function GameMode:OnGameInProgress()
                     end
                 end
             end
-            DebugPrintTable(remaining_teams)
             for Index,Value in pairs(remaining_teams) do
                 for k,v in pairs(give_vision_hero) do
                     if Value ~= v:GetTeam() then
@@ -203,7 +247,6 @@ function GameMode:InitGameMode()
   -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
   Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
 
-  _G.player_tracker = {}
   
   DebugPrint('[BAREBONES] Done loading Barebones gamemode!\n\n')
 end

@@ -7,7 +7,16 @@
 
     "OnCreated"
     {
-        "CreateThinker"
+        "ApplyModifier"
+        {
+            "ModifierName"  "destroy_trees_thinker"
+            "Target"        "CASTER"
+        }
+    }
+    
+    "OnDeath"
+    {
+        "RemoveModifier"
         {
             "ModifierName"  "destroy_trees_thinker"
             "Target"        "CASTER"
@@ -22,7 +31,7 @@
             "IsHidden"    "1"
             "States"
             {
-                "MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+                //"MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
                 "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED"
                 "MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY"   "MODIFIER_STATE_VALUE_ENABLED"
             }
