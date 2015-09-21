@@ -93,7 +93,7 @@
 	            "IsHidden"    "1"
 	            "States"
 	            {
-	                //"MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+	                "MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
 	                "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED"
 	                "MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY"   "MODIFIER_STATE_VALUE_ENABLED"
 	            }
@@ -172,6 +172,14 @@
 	            "Radius"        "%radius"
 	        }
 	    }
+	    
+	    "Modifiers"
+	    {
+	        "modifier_lumber"
+	        {
+	            "Passive"       "1"
+	        }
+	    }
 	}
 	"cut_tree_2_players"
 	{
@@ -226,6 +234,14 @@
 	        {
 	            "Target"        "CASTER"
 	            "Radius"        "%radius"
+	        }
+	    }
+	    
+	    "Modifiers"
+	    {
+	        "modifier_lumber"
+	        {
+	            "Passive"       "1"
 	        }
 	    }
 	}
@@ -284,6 +300,14 @@
 	            "Radius"        "%radius"
 	        }
 	    }
+	    
+	    "Modifiers"
+	    {
+	        "modifier_lumber"
+	        {
+	            "Passive"       "1"
+	        }
+	    }
 	}
 	"cut_tree_4_players"
 	{
@@ -338,6 +362,14 @@
 	        {
 	            "Target"        "CASTER"
 	            "Radius"        "%radius"
+	        }
+	    }
+	    
+	    "Modifiers"
+	    {
+	        "modifier_lumber"
+	        {
+	            "Passive"       "1"
 	        }
 	    }
 	}

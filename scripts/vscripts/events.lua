@@ -457,7 +457,7 @@ function GameMode:OnNPCGoalReached(keys)
   local nextGoalEntity = EntIndexToHScript(keys.next_goal_entindex)
   local npc = EntIndexToHScript(keys.npc_entindex)
   
-  if nextGoalEntity == nil and npc == boss_unit then
-    npc:ForceKill(false)
-  end
+  --if nextGoalEntity == nil and npc == boss_unit then
+  --  npc:ForceKill(false)
+  --end
 end

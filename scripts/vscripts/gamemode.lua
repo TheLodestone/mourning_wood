@@ -101,10 +101,11 @@ function GameMode:OnHeroInGame(hero)
   player_tracker[team]["hero"] = hero
   player_tracker[team]["player"] = player
   player_tracker[team]["block"] = 0
+  player_tracker[team]["checkpoint"] = 0
 
   SendToConsole("dota_camera_center")
 
-  hero:AddNewModifier(hero,nil,"modifier_stunned", nil)
+  --hero:AddNewModifier(hero,nil,"modifier_stunned", nil)
 end
 
 --[[
@@ -188,7 +189,7 @@ function GameMode:OnGameInProgress()
         end
         GameRules:SetTimeOfDay( new_time )
         if new_time >= 0.75 or new_time < 0.25 then
-            --mode:SetFogOfWarDisabled(false)
+            mode:SetFogOfWarDisabled(false)
             local most_lumber = 0
             local highest_lumber = 0
             local give_vision = {}

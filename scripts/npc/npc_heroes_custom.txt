@@ -5,7 +5,7 @@
 	    "AbilityLayout"     "3"
 	    "override_hero"     "npc_dota_hero_shredder"
 	    "SoundSet"          "0" 
-	    "Ability1"        "cut_tree_8_players" 
+	    "Ability1"        "cut_tree_4_players" 
 	    "Ability2"        "machine_sludge" 
 	    "Ability3"        "rocket_boost" 
 	    "Ability4"        ""

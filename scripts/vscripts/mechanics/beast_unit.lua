@@ -17,7 +17,7 @@ function Deaggro( event )
         detection_radius.y = beast_loc.y + i * math.sin(math.rad(left))
         local shredder = Entities:FindByNameNearest("npc_dota_hero_shredder",detection_radius,300)
         if shredder ~= nil and shredder:IsAlive() == true then
-            --shredder:ForceKill(false)
+            shredder:ForceKill(false)
             StartAnimation(beast, {duration = 1, activity = ACT_DOTA_ATTACK, rate = 1})
         end
     end
@@ -27,7 +27,7 @@ function Deaggro( event )
         detection_radius.y = beast_loc.y + i * math.sin(math.rad(right))
         local shredder = Entities:FindByNameNearest("npc_dota_hero_shredder",detection_radius,300)
         if shredder ~= nil and shredder:IsAlive() == true then
-            --shredder:ForceKill(false)
+            shredder:ForceKill(false)
             StartAnimation(beast, {duration = 1, activity = ACT_DOTA_ATTACK, rate = 1})
         end
     end

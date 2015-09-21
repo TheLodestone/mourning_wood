@@ -53,4 +53,12 @@
             "Radius"        "%radius"
         }
     }
+    
+    "Modifiers"
+    {
+        "modifier_lumber"
+        {
+            "Passive"       "1"
+        }
+    }
 }

@@ -1,0 +1,7 @@
+-Checkpoints with towns
+    -Gate keeps Rosh out but has health
+    -Shops allow you to bank wood at a price and buy items
+-When you die you lose wood
+-Tutorial notes/hints as you play
+-Special runes
+    -Swap with a player

@@ -15,5 +15,6 @@ function LumberStacks( event )
     end
     
     player_tracker[player]["lumber"] = player_tracker[player]["lumber"] + count
+    caster:SetModifierStackCount("modifier_lumber", caster, stacks + count)
     GameRules:GetGameModeEntity():SetTopBarTeamValue(player,player_tracker[player]["lumber"])
 end
